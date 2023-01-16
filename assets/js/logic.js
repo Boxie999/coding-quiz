@@ -12,7 +12,7 @@ var startButton = document.getElementById('start');
 var questionsContainer = document.getElementById('questions');
 var questionsTitle = document.querySelector('#question-title');
 var choicesContainer = document.querySelector('#choices');
-var timerContainer = document.querySelector('#timer');
+var timerContainer = document.querySelector('#time');
 var choicesList = document.querySelector('#choices-list')
 
  function populateQuestion(questions) {
@@ -34,36 +34,38 @@ var choicesList = document.querySelector('#choices-list')
    choicesContainer.appendChild(choicesList);
   }
   
-} 
+} ;
 
 function startQuiz () {
+  
+  
   console.log('Start button has been clicked.')
-    startScreenElement.setAttribute = ('class', 'hide');
-    questionsContainer.removeAttribute = ('class'); 
-    
+    startScreenElement.setAttribute('class', 'hide');
+    questionsContainer.setAttribute('class', 'visible'); 
+    populateQuestion(questions[currentQuestion]);
+    console.log(questions[currentQuestion]);
     //show the first question
     currentQuestion = 0;
 }
+counter = 100;
 
-startButton.addEventListener('click', startQuiz);
-
-
-
-  //populateQuestion(questions[currentQuestion]); 
-
-  /*counter = 100;
   timer = setInterval(function(){
-     counter--;
-     timerContainer.textContent = counter;   //set timerContainer text to counter
+    timerContainer.textContent = counter;  
+    counter--;
+     console.log(timerContainer);
+     console.log(counter);
+       //set timerContainer text to counter
+     
+     
      if (counter <= 0) {
        //endGame();
        clearInterval(timer);
      }
     
   },1000 );
-}); */
 
-/*function nextQuestion() {
+
+function nextQuestion() {
   currentQuestion++;
   //check if we are on the last question
   if ( currentQuestion < questions.length) {
@@ -88,7 +90,7 @@ function endGame() {
 
 
 
-/*
+
 function saveHighscore (initial) {
   //get the current highscore value from local storage
   //json parse current highscores from local storage, this will be an array of object
@@ -104,4 +106,6 @@ function saveHighscore (initial) {
   //click event listener to submit button
   //var initial = initialInput.value.trim();
   //saveHighscore(initial)
-  //redirect to highscore page */
+  //redirect to highscore page 
+
+  startButton.addEventListener('click', startQuiz);
