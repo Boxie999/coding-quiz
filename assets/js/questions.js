@@ -1,4 +1,4 @@
-var question = [
+var questions = [
     {
         title: 'How can a datatype be declared to be a constant type?',
         choices: ['const','var','let','constant'],
@@ -49,4 +49,7 @@ var question = [
         choices: ['typeof', 'TypeOf', 'typeOf', 'sizeof'],
         answer: 'typeof'
     },
-]
+];
+
+
+

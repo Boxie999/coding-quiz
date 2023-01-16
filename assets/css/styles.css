@@ -32,6 +32,7 @@ button:hover {
 
 .choices button {
   display: block;
+  color: #563d7c;
 }
 
 input[type="text"] {
