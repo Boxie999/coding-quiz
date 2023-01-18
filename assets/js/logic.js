@@ -1,70 +1,76 @@
-
-
-var score = 0;
+var userScores = [];
+var scores;
 var currentQuestion;
 var counter;
 var timer;
+var audioCorrect = new Audio('assets/sfx/correct.wav');
+var audioIncorrect = new Audio('assets/sfx/incorrect.wav');
 
-console.log(questions[2].title);
 
 var startScreenElement = document.getElementById('start-screen');
 var startButton = document.getElementById('start');
-var questionsContainer = document.getElementById('questions');
-var questionsTitle = document.querySelector('#question-title');
+var questionsList = document.querySelector('#questions-list');
+var questionsTitle = document.getElementById('question-title');
 var choicesContainer = document.querySelector('#choices');
 var timerContainer = document.querySelector('#time');
-var choicesList = document.querySelector('#choices-list')
+var questionsContainer = document.querySelector('#questions');
+var endScreen = document.getElementById('end-screen');
+var finalScore = document.getElementById('final-score');
+var submitButton = document.getElementById('submit');
+var initials = document.getElementById('initials').value;
 
- function populateQuestion(questions) {
-  choicesContainer.innerHTML = '';
-  
-  for ( var i = 0; i < questions.length; i++) {
-    
-  
-    questionsTitle = questionsTitle.textContent = questions[i].title;
-    
-    var choice = document.createElement('li');
-    console.log(choice);    
+function populateQuestion(currentQuestion) {
+  console.log('Populate questions function started.')
+  questionsTitle.textContent = currentQuestion.title;
+  currentQuestion.choices.forEach((choice) => {
+    var newButton = document.createElement('button');
+    newButton.textContent = choice;
+    newButton.addEventListener('click', function(){
+      console.log(choice === currentQuestion.answer);
+      if (choice === currentQuestion.answer) {
+        questionsList.innerHTML = ""; 
+        audioCorrect.play();
+        nextQuestion();
 
-    choice.textContent = questions[i].choices;
+      }
+      else {
+        questionsList.innerHTML = ""; 
+        counter -= 10;
+        audioIncorrect.play();
+        nextQuestion();
+      }
+    } )
+    questionsList.appendChild(newButton);
+
+  })
    
-
-    choicesList.appendChild(choice);
-   
-   choicesContainer.appendChild(choicesList);
-  }
-  
 } ;
 
-function startQuiz () {
-  
-  
-  console.log('Start button has been clicked.')
+startButton.addEventListener('click', function() {
+ console.log('Start button has been clicked.')
     startScreenElement.setAttribute('class', 'hide');
     questionsContainer.setAttribute('class', 'visible'); 
-    populateQuestion(questions[currentQuestion]);
-    console.log(questions[currentQuestion]);
+    
     //show the first question
     currentQuestion = 0;
-}
-counter = 100;
+    populateQuestion(questions[currentQuestion]);
+    
+   //starts counting from 100
+   counter = 100;
 
-  timer = setInterval(function(){
+  timer = setInterval(function() {
     timerContainer.textContent = counter;  
-    counter--;
-     console.log(timerContainer);
-     console.log(counter);
-       //set timerContainer text to counter
+    counter--; // counts down every second
      
      
-     if (counter <= 0) {
-       //endGame();
-       clearInterval(timer);
+     if (counter < 0) {
+       endGame();
+       clearInterval(timer); //timer stops if it's less then 0
      }
     
-  },1000 );
+    } ,1000 ); }, ); // 1000 ms = 1 second
 
-
+  
 function nextQuestion() {
   currentQuestion++;
   //check if we are on the last question
@@ -77,35 +83,36 @@ function nextQuestion() {
 };
 
 function endGame() {
-   //when the game ends it should display their score and give the user the ability to save their scores and initials
-   // hide questionsContainer;
-   // show endscreen container
-   //assign score to finalscore container
-   //reset the timer, clearInterval(timer)
-
+  // the questions container disappears and the endscreen will be visible
+  questionsContainer.setAttribute('class', 'hide'); 
+  endScreen.setAttribute('class', 'visible');
+  
+  //scores.push(counter);
+  
+  finalScore.textContent = scores;
+  console.log(scores);
+  clearInterval(timer); //timer stops
+   
 };
 
-
-
-
-
-
-
-function saveHighscore (initial) {
-  //get the current highscore value from local storage
-  //json parse current highscores from local storage, this will be an array of object
-  //push initial + score to the array
-  //order the array from highest score to lowest
-  //json stringify then save back to local storage
+var highScores = {
+  scores : scores,
+  initials : initials
 }
-//another click event listener for choices
-  // check answer
-  // if correct, call nextQuestion()
-  // if wrong, -10s, call nextQuestion()
 
-  //click event listener to submit button
-  //var initial = initialInput.value.trim();
-  //saveHighscore(initial)
-  //redirect to highscore page 
+submitButton.addEventListener('click', function(){
+  
+  
+  userScores.push(highScores);
+  console.log(highScores);
+ 
 
-  startButton.addEventListener('click', startQuiz);
+
+  localStorage.setItem('scores', JSON.stringify(userScores));
+  var submitted = alert('You submitted your initials and scores!')
+  
+  
+}) ;   
+
+  
+

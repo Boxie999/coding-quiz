@@ -1,7 +1,7 @@
 var questions = [
     {
         title: 'How can a datatype be declared to be a constant type?',
-        choices: ['const','var','let','constant'],
+        choices: [ 'const','var','let','constant'],
         answer: 'const'
     },
     {
