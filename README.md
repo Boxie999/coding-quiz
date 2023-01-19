@@ -7,6 +7,6 @@ I wrote all of my questions and answers and stored them in an array of objects i
 I created functions and event listeners to be able to iterate through the questions of this game. You can find more explanation about them in the comments. And then I stored the user input and the scores in the local storage and accessed them on my other javascript page for the highscores and made it visible on the page, creating a new list. I think I've had the most complications with this part and it's still not perfect, but I'm already late with my assignment, so I decided to submit it, just how it is. I've put in a lot of work for this one, and found it really challenging but I think I've learned a lot during the process and it was a very good practise for me.
 
 Here's the URL for the deployed application:
-
+https://boxie999.github.io/coding-quiz/index.html
 Screenshot of the page:
 <img width="1247" alt="Screenshot 2023-01-19 at 11 42 47" src="https://user-images.githubusercontent.com/118014637/213433956-841d301f-2e56-41d6-bcd1-faf41dfa4c23.png">
