@@ -9,3 +9,4 @@ I created functions and event listeners to be able to iterate through the questi
 Here's the URL for the deployed application:
 
 Screenshot of the page:
+<img width="1247" alt="Screenshot 2023-01-19 at 11 42 47" src="https://user-images.githubusercontent.com/118014637/213433956-841d301f-2e56-41d6-bcd1-faf41dfa4c23.png">
