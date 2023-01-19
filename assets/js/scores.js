@@ -1,13 +1,20 @@
+
+//accessing the html elements 
 var highScoresList = document.getElementById('highscores');
+var clearHighscores = document.getElementById('clear');
+//getting the data from local storage
+var scoresDisplay = JSON.parse(localStorage.getItem('scores'));
 
-
-var scoresDisplay = JSON.parse(localStorage.getItem('userScores')) || [];
-console.log(scoresDisplay);
-
+//creating a new list
 var newScores = document.createElement('li');
-    newScores.textContent = scoresDisplay;
-    highScoresList.appendChild(newScores);
+//setting the value of the local storage as text    
+newScores.textContent = scoresDisplay;
+//appending the list of scores to the highscores list    
+highScoresList.appendChild(newScores);
 
-     scores.sort( (a,b) => {
-    return b.score - a.score;
-  }) 
+//click event listener for clear button
+clearHighscores.addEventListener('click', function (){
+  //clears the scores from local storage  
+  localStorage.removeItem('scores');
+  
+}) ;   
